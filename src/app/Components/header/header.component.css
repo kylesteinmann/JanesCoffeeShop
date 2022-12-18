@@ -1,0 +1,15 @@
+img {
+    height: 100px;
+}
+mat-toolbar {
+    height:100px;
+    display: flex;
+    justify-content: space-between;
+    width:100vw;
+    padding:20px
+}
+
+mat-icon {
+    scale: 2;
+
+}
