@@ -1,6 +1,32 @@
-.container {
-    display:flex;
-
-    width:100vw;
-    height:100vh;
+.body {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  background-color: #ff5252;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
+  background-color: antiquewhite;
+  box-shadow: slategray 0px 5px 10px;
+
+}
+.cardsContainer {
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  justify-content:center;
+}
+mat-card {
+  margin: 5px;
+  width: 20%;
+  height: 100px;
+}
+/* h1 {
+    font-family:;
+} */
