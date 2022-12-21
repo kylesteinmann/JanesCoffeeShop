@@ -1,21 +1,28 @@
-<div class="container">
-  <mat-card >
-    <mat-card-header color="primary">
-      <mat-card-title>Actions Buttons</mat-card-title>
-      <mat-card-subtitle>Start</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Let's see if this works</p>
-    </mat-card-content>
-  </mat-card>
-  <iframe
-    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fjanescoffeehouse&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-    width="340px"
-    height="500px"
-    style="border: none; overflow: hidden"
-    scrolling="no"
-    frameborder="0"
-    allowfullscreen="true"
-    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-  ></iframe>
+<div class="body">
+  <div class="container">
+    <h1>Drinks</h1>
+    <div class="cardsContainer">
+      <mat-card *ngFor="let item of menuService.drinkItems">
+        <mat-card-header color="primary">
+          <mat-card-title>{{ item.drinkName }}</mat-card-title>
+          <mat-card-subtitle
+            >regular: {{ item.smallPrice }} large:
+            {{ item.largePrice }}</mat-card-subtitle
+          >
+        </mat-card-header>
+      </mat-card>
+    </div>
+    <!-- <div class="socialContainer">
+      <iframe
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fjanescoffeehouse&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+        width="340px"
+        height="500px"
+        style="border: none; overflow: hidden"
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+      ></iframe>
+    </div> -->
+  </div>
 </div>

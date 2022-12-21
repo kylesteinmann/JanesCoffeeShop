@@ -9,12 +9,14 @@ import {MatCardModule} from '@angular/material/card';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { HomeComponent } from './Components/home/home.component';
+import { PortalComponent } from './Components/portal/portal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    PortalComponent
   ],
   imports: [
     BrowserModule,
