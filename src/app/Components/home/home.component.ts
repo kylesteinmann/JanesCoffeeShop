@@ -10,7 +10,7 @@ import { MenuService } from 'src/app/Services/menu.service';
 export class HomeComponent {
 
   constructor(public menuService: MenuService) {
-
+    menuService.fetchDrinkData()
   }
 
 }

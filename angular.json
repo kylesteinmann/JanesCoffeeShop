@@ -92,6 +92,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "JanesCoffeeShop:build:production",
+            "firebaseProject": "janescoffeehouse-78763",
+            "firebaseHostingSite": "janescoffeehouse"
+          }
         }
       }
     }

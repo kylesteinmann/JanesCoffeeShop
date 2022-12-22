@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "janescoffeehouse-78763": {
+      "hosting": {
+        "JanesCoffeeShop": [
+          "janescoffeehouse"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "janescoffeehouse-78763"
+  }
+}

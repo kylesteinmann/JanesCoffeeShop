@@ -1,18 +1,45 @@
 import { Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Drink } from '../Models/drink';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MenuService {
+  drinkItems: Drink[] = [];
 
-drinkItems=[
-  {drinkName: "White Chocolate Mocha", smallPrice: '5.50', largePrice: '6.00'},
-  {drinkName: "Frappe's", smallPrice: '5.25', largePrice: '5.79s'},
-  {drinkName: "White Chocolate Mocha", smallPrice: '5.50', largePrice: '6.00'},
-  {drinkName: "White Chocolate Mocha", smallPrice: '5.50', largePrice: '6.00'},
-  {drinkName: "White Chocolate Mocha", smallPrice: '5.50', largePrice: '6.00'},
-  {drinkName: "White Chocolate Mocha", smallPrice: '5.50', largePrice: '6.00'},
-]
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  addDrink(drinkData: NgForm) {
+    this.http
+      .post(
+        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks.json',
+        drinkData.value
+      )
+      .subscribe();
+    this.drinkItems.push(drinkData.value);
+    drinkData.resetForm();
+  }
+
+  fetchDrinkData() {
+    this.http
+      .get<{ [key: string]: Drink }>(
+        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks.json'
+      )
+      .pipe(
+        map((responseData) => {
+          const drinks = [];
+          for (const key in responseData) {
+            drinks.push({ ...responseData[key], id: key });
+          }
+          return drinks;
+        })
+      )
+      .subscribe((drinksData) => {
+        console.log(drinksData);
+        this.drinkItems = drinksData;
+      });
+  }
 }

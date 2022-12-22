@@ -1,1 +1,18 @@
-
+<form
+#drinkForm = "ngForm"
+(ngSubmit)="menuService.addDrink(drinkForm)">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input ngModel matInput type="text" name="drinkName" required/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Reg. Price</mat-label >
+    <input ngModel matInput type="text" name="regularPrice" required/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Lg. Price</mat-label>
+    <input ngModel matInput type="text" name="largePrice" required/>
+  </mat-form-field>
+  <button mat-raised-button color="accent" type="submit"[disabled]=!drinkForm.valid>Submit</button>
+</form>
+<app-home></app-home>
