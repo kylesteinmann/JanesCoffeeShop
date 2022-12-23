@@ -42,4 +42,17 @@ export class MenuService {
         this.drinkItems = drinksData;
       });
   }
+
+  onRemoveDrink(id: any) {
+    this.http
+      .delete(
+        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks/' +
+          id +
+          '.json'
+      )
+      .subscribe(() => {
+        console.log(id)
+        this.fetchDrinkData();
+      });
+  }
 }
