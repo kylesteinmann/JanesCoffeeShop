@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Drinks</h1>
     <div class="cardsContainer">
-      <mat-card *ngFor="let item of menuService.drinkItems">
+      <mat-card *ngFor="let item of menuService.drinkItems" (click)="menuService.openDrinksDialog(item)">
         <mat-card-title
           ><strong>{{ item.drinkName }}</strong></mat-card-title
         >

@@ -13,5 +13,4 @@ export class HomeComponent {
     menuService.fetchDrinkData()
     menuService. fetchTreatData()
   }
-
 }

@@ -4,6 +4,8 @@ import { Drink } from '../Models/drink';
 import { Treat } from '../Models/treat';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DrinkComponent } from '../Modals/drink/drink.component';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +13,10 @@ import { map } from 'rxjs';
 export class MenuService {
   drinkItems: Drink[] = [];
   treatItems: Treat[] = [];
+  currentDrinkSelected: any
+  flavors = ['white Chololate', 'mocha', 'carmel']
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public dialog: MatDialog) {}
 
   addDrink(drinkData: NgForm) {
     this.http
@@ -99,5 +103,15 @@ export class MenuService {
         console.log(id);
         this.fetchTreatData();
       });
+  }
+  openDrinksDialog(drinkInfo: any) {
+    this.currentDrinkSelected=drinkInfo;
+    console.log(drinkInfo)
+    console.log(this.currentDrinkSelected)
+    this.dialog.open(DrinkComponent);
+  }
+
+  onAddDrinkToOrder(){
+
   }
 }
