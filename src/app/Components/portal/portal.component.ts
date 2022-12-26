@@ -4,9 +4,15 @@ import { MenuService } from 'src/app/Services/menu.service';
 @Component({
   selector: 'app-portal',
   templateUrl: './portal.component.html',
-  styleUrls: ['./portal.component.css']
+  styleUrls: ['./portal.component.css'],
 })
 export class PortalComponent {
-  constructor(public menuService:MenuService){ menuService.fetchDrinkData()}
+  editDrinksSelected = false;
+  editTreatsSelected = false;
+  editSpecialsSelected = false;
 
+  constructor(public menuService: MenuService) {
+    menuService.fetchDrinkData();
+    menuService. fetchTreatData()
+  }
 }

@@ -1,36 +1,116 @@
-<form
-#drinkForm = "ngForm"
-(ngSubmit)="menuService.addDrink(drinkForm)">
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input ngModel matInput type="text" name="drinkName" required/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Reg. Price</mat-label >
-    <input ngModel matInput type="text" name="regularPrice" required/>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Lg. Price</mat-label>
-    <input ngModel matInput type="text" name="largePrice" required/>
-  </mat-form-field>
-  <button mat-raised-button color="accent" type="submit"[disabled]=!drinkForm.valid>Submit</button>
-</form>
+<button
+  mat-raised-button
+  color="accent"
+  (click)="
+    editDrinksSelected = !editDrinksSelected;
+    editTreatsSelected = false && (editSpecialsSelected = false)
+  "
+>
+  Edit Drinks
+</button>
 
-<div class="body">
-  <div class="container">
-    <h1>Drinks</h1>
-    <div class="cardsContainer">
-      <mat-card *ngFor="let item of menuService.drinkItems">
-        <mat-card-title
-          ><strong>{{ item.drinkName }}</strong></mat-card-title
-        >
-        <mat-card-content
-          >reg: {{ item.regularPrice }} | lg:
-          {{ item.largePrice }}</mat-card-content
-        >
-        <mat-icon (click)="menuService.onRemoveDrink(item.id)">delete</mat-icon>
-      </mat-card>
+<button
+  mat-raised-button
+  color="accent"
+  (click)="
+    editTreatsSelected = !editTreatsSelected;
+    editDrinksSelected = false && (editSpecialsSelected = false)
+  "
+>
+  Edit Treats
+</button>
+
+<button
+  mat-raised-button
+  color="accent"
+  (click)="
+    editSpecialsSelected = !editSpecialsSelected;
+    editDrinksSelected = false && (editTreatsSelected = false)
+  "
+>
+  Edit Specials
+</button>
+
+<div *ngIf="editDrinksSelected">
+  <form #drinkForm="ngForm" (ngSubmit)="menuService.addDrink(drinkForm)">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input ngModel matInput type="text" name="drinkName" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Reg. Price</mat-label>
+      <input ngModel matInput type="text" name="regularPrice" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Lg. Price</mat-label>
+      <input ngModel matInput type="text" name="largePrice" required />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="!drinkForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+
+  <div class="body">
+    <div class="container">
+      <h1>Drinks</h1>
+      <div class="cardsContainer">
+        <mat-card *ngFor="let item of menuService.drinkItems">
+          <mat-card-title
+            ><strong>{{ item.drinkName }}</strong></mat-card-title
+          >
+          <mat-card-content
+            >reg: {{ item.regularPrice }} | lg:
+            {{ item.largePrice }}</mat-card-content
+          >
+          <mat-icon (click)="menuService.onRemoveDrink(item.id)"
+            >delete</mat-icon
+          >
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
 
+<div *ngIf="editTreatsSelected">
+  <form #treatForm="ngForm" (ngSubmit)="menuService.addTreat(treatForm)">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input ngModel matInput type="text" name="treatName" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Reg. Price</mat-label>
+      <input ngModel matInput type="text" name="regularPrice" required />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="!treatForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+
+  <div class="body">
+    <div class="container">
+      <h1>Treats</h1>
+      <div class="cardsContainer">
+        <mat-card *ngFor="let item of menuService.treatItems">
+          <mat-card-title
+            ><strong>{{ item.treatName }}</strong></mat-card-title
+          >
+          <mat-card-content>reg: {{ item.regularPrice }}</mat-card-content>
+          <mat-icon (click)="menuService.onRemovetreat(item.id)"
+            >delete</mat-icon
+          >
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

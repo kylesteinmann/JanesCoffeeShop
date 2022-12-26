@@ -11,6 +11,7 @@ export class HomeComponent {
 
   constructor(public menuService: MenuService) {
     menuService.fetchDrinkData()
+    menuService. fetchTreatData()
   }
 
 }
