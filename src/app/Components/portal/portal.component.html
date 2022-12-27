@@ -24,11 +24,11 @@
   mat-raised-button
   color="accent"
   (click)="
-    editSpecialsSelected = !editSpecialsSelected;
+    incomingOrders = !incomingOrders;
     editDrinksSelected = false && (editTreatsSelected = false)
   "
 >
-  Edit Specials
+  Incoming Orders
 </button>
 
 <div *ngIf="editDrinksSelected">
@@ -109,6 +109,29 @@
           <mat-icon (click)="menuService.onRemovetreat(item.id)"
             >delete</mat-icon
           >
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="incomingOrders">
+  <div class="body">
+    <div class="container">
+      <h1>Treats</h1>
+      <div class="cardsContainer">
+        <mat-card *ngFor="let order of menuService.incomingOrders">
+          <div *ngFor="let item of order">
+            <mat-card-title
+              ><strong
+                >{{ item.quantity }} {{ item.size }} {{ item.name }}</strong
+              ></mat-card-title
+            >
+
+            <mat-card-content>{{ item.flavors }}</mat-card-content>
+
+            <mat-icon>delete</mat-icon>
+          </div>
         </mat-card>
       </div>
     </div>

@@ -18,7 +18,7 @@
   <div class="container">
     <h1>Treats</h1>
     <div class="cardsContainer">
-      <mat-card *ngFor="let item of menuService.treatItems">
+      <mat-card *ngFor="let item of menuService.treatItems" (click)="menuService.openTreatsDialog(item)">
         <mat-card-title
           ><strong>{{ item.treatName }}</strong></mat-card-title
         >

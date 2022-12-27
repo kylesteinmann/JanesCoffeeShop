@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DrinkComponent } from '../Modals/drink/drink.component';
+import { TreatComponent } from '../Modals/treat/treat.component';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,12 @@ export class MenuService {
   drinkItems: Drink[] = [];
   treatItems: Treat[] = [];
   currentDrinkSelected: any;
+  currentTreatSelected: any;
   flavors = ['white Chololate', 'mocha', 'carmel'];
-  order: any[] = [];
+  currentOrder: any[] = [];
+  incomingOrders = []
 
-  constructor(private http: HttpClient, public dialog: MatDialog) {}
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   addDrink(drinkData: NgForm) {
     this.http
@@ -54,14 +57,15 @@ export class MenuService {
     this.http
       .delete(
         'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks/' +
-          id +
-          '.json'
+        id +
+        '.json'
       )
       .subscribe(() => {
         console.log(id);
         this.fetchDrinkData();
       });
   }
+
   addTreat(treatsData: NgForm) {
     this.http
       .post(
@@ -97,18 +101,17 @@ export class MenuService {
     this.http
       .delete(
         'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/treats/' +
-          id +
-          '.json'
+        id +
+        '.json'
       )
       .subscribe(() => {
         console.log(id);
         this.fetchTreatData();
       });
   }
+
   openDrinksDialog(drinkInfo: any) {
     this.currentDrinkSelected = drinkInfo;
-    console.log(drinkInfo);
-    console.log(this.currentDrinkSelected);
     this.dialog.open(DrinkComponent);
   }
 
@@ -125,11 +128,31 @@ export class MenuService {
         : currentDrink.largePrice;
 
     const drinkDetails = {
-      drinkname: currentDrink.drinkName,
+      name: currentDrink.drinkName,
       flavors: filteredFlavorKeys,
+      quanity: 1,
       size: drinkData.value.size,
       price: currentPrice,
     };
-    this.order.push(drinkDetails);
+    this.currentOrder.push(drinkDetails);
+    console.log(this.currentOrder)
   }
+
+  openTreatsDialog(treatInfo: any) {
+    this.currentTreatSelected = treatInfo;
+    this.dialog.open(TreatComponent);
+  }
+
+  onAddTreatToOrder(treatData: NgForm, currentTreat: any) {
+    const treatDetails = {
+      name: currentTreat.treatName,
+      quanity:treatData.value.quantity,
+      price: currentTreat.regularPrice,
+    };
+    this.currentOrder.push(treatDetails);
+
+    console.log(this.currentOrder)
+
+  }
+
 }

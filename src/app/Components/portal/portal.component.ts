@@ -10,9 +10,10 @@ export class PortalComponent {
   editDrinksSelected = false;
   editTreatsSelected = false;
   editSpecialsSelected = false;
+  incomingOrders = true
 
   constructor(public menuService: MenuService) {
     menuService.fetchDrinkData();
-    menuService. fetchTreatData()
+    menuService.fetchTreatData()
   }
 }

@@ -10,21 +10,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import { MatMenuModule} from '@angular/material/menu';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
-import { HomeComponent } from './Components/home/home.component';
+import { MenuComponent} from './Components/menu/menu.component'
 import { PortalComponent } from './Components/portal/portal.component';
 import { DrinkComponent } from './Modals/drink/drink.component';
+import { TreatComponent } from './Modals/treat/treat.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, PortalComponent, DrinkComponent],
+  declarations: [AppComponent, HeaderComponent, PortalComponent, DrinkComponent, TreatComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -3,14 +3,14 @@ import { MenuService } from 'src/app/Services/menu.service';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
-export class HomeComponent {
+export class MenuComponent {
 
   constructor(public menuService: MenuService) {
     menuService.fetchDrinkData()
-    menuService. fetchTreatData()
+    menuService.fetchTreatData()
   }
 }
