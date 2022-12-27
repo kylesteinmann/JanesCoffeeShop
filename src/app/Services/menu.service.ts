@@ -13,8 +13,9 @@ import { DrinkComponent } from '../Modals/drink/drink.component';
 export class MenuService {
   drinkItems: Drink[] = [];
   treatItems: Treat[] = [];
-  currentDrinkSelected: any
-  flavors = ['white Chololate', 'mocha', 'carmel']
+  currentDrinkSelected: any;
+  flavors = ['white Chololate', 'mocha', 'carmel'];
+  order: any[] = [];
 
   constructor(private http: HttpClient, public dialog: MatDialog) {}
 
@@ -79,7 +80,7 @@ export class MenuService {
       )
       .pipe(
         map((responseData) => {
-          const treats = [];
+          const treats: any[] = [];
           for (const key in responseData) {
             treats.push({ ...responseData[key], id: key });
           }
@@ -105,13 +106,30 @@ export class MenuService {
       });
   }
   openDrinksDialog(drinkInfo: any) {
-    this.currentDrinkSelected=drinkInfo;
-    console.log(drinkInfo)
-    console.log(this.currentDrinkSelected)
+    this.currentDrinkSelected = drinkInfo;
+    console.log(drinkInfo);
+    console.log(this.currentDrinkSelected);
     this.dialog.open(DrinkComponent);
   }
 
-  onAddDrinkToOrder(){
+  onAddDrinkToOrder(drinkData: NgForm, currentDrink: any) {
+    const flavorKeys = Object.keys(drinkData.value);
+    const filteredFlavorKeys = flavorKeys.filter((key) => {
+      if (key !== 'size') {
+        return drinkData.value[key];
+      }
+    });
+    const currentPrice =
+      drinkData.value.size === 'regularPrice'
+        ? currentDrink.regularPrice
+        : currentDrink.largePrice;
 
+    const drinkDetails = {
+      drinkname: currentDrink.drinkName,
+      flavors: filteredFlavorKeys,
+      size: drinkData.value.size,
+      price: currentPrice,
+    };
+    this.order.push(drinkDetails);
   }
 }
