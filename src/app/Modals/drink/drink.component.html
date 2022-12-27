@@ -1,17 +1,21 @@
 <h1 mat-dialog-title>{{ menuService.currentDrinkSelected.drinkName }}</h1>
-<mat-form-field appearance="fill">
-  <mat-label>Size</mat-label>
-  <mat-select>
-    <mat-option value="regular"> Regular </mat-option>
-    <mat-option value = 'large'> Large </mat-option>
-  </mat-select>
-</mat-form-field>
+<form #drinkForm="ngForm" (ngSubmit)="menuService.onAddDrinkToOrder(drinkForm, menuService.currentDrinkSelected);">
+  <mat-form-field appearance="fill">
+    <mat-label>Size</mat-label>
+    <mat-select name="size" ngModel>
+      <mat-option value='regularPrice'>Regular {{menuService.currentDrinkSelected.regularPrice}}  </mat-option>
+      <mat-option value='largePrice'> Large {{menuService.currentDrinkSelected.largePrice}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-checkbox *ngFor="let item of menuService.flavors" value="item">
-  {{ item }}
-</mat-checkbox>
+  <div *ngFor="let item of menuService.flavors;let i = index"  value=drinkForm.value>
 
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-button mat-dialog-close (click)="menuService.onAddDrinkToOrder()">Add to Order</button>
+  <mat-checkbox [name]=menuService.flavors[i] ngModel>
+    {{ item }}
+  </mat-checkbox>
 </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button mat-dialog-close type="submit">Add to Order</button>
+  </div>
+</form>
