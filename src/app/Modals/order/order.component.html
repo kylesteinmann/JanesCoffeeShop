@@ -1,0 +1,18 @@
+<div *ngFor="let item of menuService.currentOrder">
+  <div class="container">
+    <div>
+      <h1 mat-dialog-content>
+        {{ item.quantity }} {{ item.size }} {{ item.name }}
+      </h1>
+      <h2 mat-dialog-content>{{ item.flavors }}</h2>
+    </div>
+    <div>
+      <h2 mat-dialog-content>{{ item.price }}</h2>
+    </div>
+  </div>
+  <hr />
+</div>
+<div class="buttons">
+  <button mat-button mat-dialog-close>Submit Order</button>
+  <button mat-button mat-dialog-close>Clear Order</button>
+</div>

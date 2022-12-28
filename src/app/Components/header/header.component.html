@@ -1,9 +1,11 @@
 <mat-toolbar color="primary">
-  <img  src="/assets/JanesCoffeeShopLogo.png" alt="Logo" />
+
+
   <mat-icon color="accent" [matMenuTriggerFor]="beforeMenu">menu</mat-icon>
   <mat-menu #beforeMenu="matMenu" yPosition="below">
     <button mat-menu-item routerLink="/">Menu</button>
     <button mat-menu-item routerLink="/portal">Portal</button>
   </mat-menu>
+<img src="/assets/JanesCoffeeShopLogo.png" alt="Logo" />
+  <mat-icon color="accent" (click)="menuService.openOrderDialog()">free_breakfast</mat-icon>
 </mat-toolbar>
-

@@ -2,7 +2,7 @@ img {
     height: 100px;
 }
 mat-toolbar {
-    height:120px;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     padding:20px
@@ -10,5 +10,6 @@ mat-toolbar {
 
 mat-icon {
     scale: 2;
+    padding:20px
 
 }

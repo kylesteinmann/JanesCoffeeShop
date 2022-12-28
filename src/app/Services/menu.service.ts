@@ -7,6 +7,7 @@ import { map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DrinkComponent } from '../Modals/drink/drink.component';
 import { TreatComponent } from '../Modals/treat/treat.component';
+import { OrderComponent } from '../Modals/order/order.component';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +19,9 @@ export class MenuService {
   currentTreatSelected: any;
   flavors = ['white Chololate', 'mocha', 'carmel'];
   currentOrder: any[] = [];
-  incomingOrders = []
+  incomingOrders = [];
 
-  constructor(private http: HttpClient, public dialog: MatDialog) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) {}
 
   addDrink(drinkData: NgForm) {
     this.http
@@ -57,8 +58,8 @@ export class MenuService {
     this.http
       .delete(
         'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks/' +
-        id +
-        '.json'
+          id +
+          '.json'
       )
       .subscribe(() => {
         console.log(id);
@@ -101,8 +102,8 @@ export class MenuService {
     this.http
       .delete(
         'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/treats/' +
-        id +
-        '.json'
+          id +
+          '.json'
       )
       .subscribe(() => {
         console.log(id);
@@ -130,12 +131,12 @@ export class MenuService {
     const drinkDetails = {
       name: currentDrink.drinkName,
       flavors: filteredFlavorKeys,
-      quanity: 1,
+      quantity: 1,
       size: drinkData.value.size,
       price: currentPrice,
     };
     this.currentOrder.push(drinkDetails);
-    console.log(this.currentOrder)
+    console.log(this.currentOrder);
   }
 
   openTreatsDialog(treatInfo: any) {
@@ -146,13 +147,15 @@ export class MenuService {
   onAddTreatToOrder(treatData: NgForm, currentTreat: any) {
     const treatDetails = {
       name: currentTreat.treatName,
-      quanity:treatData.value.quantity,
+      quantity: treatData.value.quantity,
       price: currentTreat.regularPrice,
     };
     this.currentOrder.push(treatDetails);
 
-    console.log(this.currentOrder)
-
+    console.log(this.currentOrder);
   }
 
+  openOrderDialog() {
+    this.dialog.open(OrderComponent);
+  }
 }
