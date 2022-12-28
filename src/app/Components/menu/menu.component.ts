@@ -12,5 +12,6 @@ export class MenuComponent {
   constructor(public menuService: MenuService) {
     menuService.fetchDrinkData()
     menuService.fetchTreatData()
+    menuService.fetchFlavorData()
   }
 }

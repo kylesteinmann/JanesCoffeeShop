@@ -14,7 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { AppComponent } from './app.component';
@@ -42,7 +42,9 @@ import { OrderComponent } from './Modals/order/order.component';
     MatMenuModule,
     MatDialogModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatBadgeModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,5 +7,5 @@
     <button mat-menu-item routerLink="/portal">Portal</button>
   </mat-menu>
 <img src="/assets/JanesCoffeeShopLogo.png" alt="Logo" />
-  <mat-icon color="accent" (click)="menuService.openOrderDialog()">free_breakfast</mat-icon>
+  <mat-icon color="accent" matBadge="menuService.currentOrder.length()" [matBadgeHidden]="!menuService.itemsInOrderMessage" matBadgeColor="accent" (click)="menuService.openOrderDialog()">free_breakfast</mat-icon>
 </mat-toolbar>

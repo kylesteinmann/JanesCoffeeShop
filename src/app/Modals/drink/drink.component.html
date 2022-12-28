@@ -8,10 +8,10 @@
     </mat-select>
   </mat-form-field>
 
-  <div *ngFor="let item of menuService.flavors;let i = index"  value=drinkForm.value>
+  <div *ngFor="let item of menuService.flavorItems;"  value=drinkForm.value>
 
-  <mat-checkbox [name]=menuService.flavors[i] ngModel>
-    {{ item }}
+  <mat-checkbox [name]="item.flavorName" ngModel>
+    {{ item.flavorName }}
   </mat-checkbox>
 </div>
   <div mat-dialog-actions>

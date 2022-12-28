@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DrinkComponent } from '../Modals/drink/drink.component';
 import { TreatComponent } from '../Modals/treat/treat.component';
 import { OrderComponent } from '../Modals/order/order.component';
+import { Order } from '../Models/order';
 
 @Injectable({
   providedIn: 'root',
@@ -15,13 +16,15 @@ import { OrderComponent } from '../Modals/order/order.component';
 export class MenuService {
   drinkItems: Drink[] = [];
   treatItems: Treat[] = [];
+  flavorItems: any[] = [];
   currentDrinkSelected: any;
   currentTreatSelected: any;
-  flavors = ['white Chololate', 'mocha', 'carmel'];
-  currentOrder: any[] = [];
-  incomingOrders = [];
+  currentOrder: Order[] = [];
+  incomingOrders: any = [];
+  itemsInOrderMessage = false
 
-  constructor(private http: HttpClient, public dialog: MatDialog) {}
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
+
 
   addDrink(drinkData: NgForm) {
     this.http
@@ -49,7 +52,7 @@ export class MenuService {
         })
       )
       .subscribe((drinksData) => {
-        console.log(drinksData);
+
         this.drinkItems = drinksData;
       });
   }
@@ -58,11 +61,11 @@ export class MenuService {
     this.http
       .delete(
         'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks/' +
-          id +
-          '.json'
+        id +
+        '.json'
       )
       .subscribe(() => {
-        console.log(id);
+
         this.fetchDrinkData();
       });
   }
@@ -93,7 +96,7 @@ export class MenuService {
         })
       )
       .subscribe((treatsData) => {
-        console.log(treatsData);
+
         this.treatItems = treatsData;
       });
   }
@@ -102,11 +105,11 @@ export class MenuService {
     this.http
       .delete(
         'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/treats/' +
-          id +
-          '.json'
+        id +
+        '.json'
       )
       .subscribe(() => {
-        console.log(id);
+
         this.fetchTreatData();
       });
   }
@@ -136,7 +139,8 @@ export class MenuService {
       price: currentPrice,
     };
     this.currentOrder.push(drinkDetails);
-    console.log(this.currentOrder);
+    this.itemsInOrderMessage = true
+
   }
 
   openTreatsDialog(treatInfo: any) {
@@ -151,11 +155,91 @@ export class MenuService {
       price: currentTreat.regularPrice,
     };
     this.currentOrder.push(treatDetails);
+    this.itemsInOrderMessage = true
 
-    console.log(this.currentOrder);
+
+  }
+
+  addFlavor(flavorData: NgForm) {
+    this.http
+      .post(
+        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/flavors.json',
+        flavorData.value
+      )
+      .subscribe(() => {
+        this.fetchFlavorData()
+        flavorData.resetForm();
+      });
+
+  }
+
+  fetchFlavorData() {
+    this.http
+      .get<{ [key: string]: Treat }>(
+        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/flavors.json'
+      )
+      .pipe(
+        map((responseData) => {
+          const flavors: any[] = [];
+          for (const key in responseData) {
+            flavors.push({ ...responseData[key], id: key });
+          }
+          return flavors;
+        })
+      )
+      .subscribe((flavorData) => {
+
+        this.flavorItems = flavorData;
+      });
+  }
+
+  onRemoveFlavor(id: any) {
+    this.http
+      .delete(
+        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/flavors/' +
+        id +
+        '.json'
+      )
+      .subscribe(() => {
+
+        this.fetchFlavorData();
+      });
   }
 
   openOrderDialog() {
     this.dialog.open(OrderComponent);
   }
+
+  onSubmitOrder() {
+    this.http.post('https://janescoffeehouse-78763-default-rtdb.firebaseio.com/orders.json', this.currentOrder).subscribe(() => {
+      this.itemsInOrderMessage = false
+      this.currentOrder = []
+    }
+    )
+  }
+
+  fetchIncomeingOrdersData() {
+    this.http
+      .get<{ [key: string]: Order }>(
+        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/orders.json'
+      )
+      .pipe(
+        map((responseData) => {
+          const orders: any[] = [];
+          for (const key in responseData) {
+            orders.push({ ...responseData[key], id: key });
+          }
+          return orders;
+        })
+      )
+      .subscribe((ordersData) => {
+        this.incomingOrders = ordersData;
+      });
+  }
+
+  toArray(orders: any) {
+    return Object.keys(orders).map(key => orders[key])
+  }
+
 }
+

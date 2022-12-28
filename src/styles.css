@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-badge-medium.mat-badge-above .mat-badge-content {
+  top: 10px;
+  left: 10px;
+  transform: scale(.25);
+  background-color:white
+}

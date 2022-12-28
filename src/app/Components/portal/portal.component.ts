@@ -9,11 +9,13 @@ import { MenuService } from 'src/app/Services/menu.service';
 export class PortalComponent {
   editDrinksSelected = false;
   editTreatsSelected = false;
-  editSpecialsSelected = false;
-  incomingOrders = true
+  editFlavorsSelected = false;
+  incomingOrdersSelected = true;
 
   constructor(public menuService: MenuService) {
     menuService.fetchDrinkData();
-    menuService.fetchTreatData()
+    menuService.fetchTreatData();
+    menuService.fetchIncomeingOrdersData();
+    menuService.fetchFlavorData();
   }
 }
