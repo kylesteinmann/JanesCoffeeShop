@@ -3,7 +3,9 @@
   color="accent"
   (click)="
     editDrinksSelected = !editDrinksSelected;
-    editTreatsSelected = false && (editSpecialsSelected = false)
+    editTreatsSelected = false;
+    editFlavorsSelected = false;
+    incomingOrdersSelected = false;
   "
 >
   Edit Drinks
@@ -14,7 +16,9 @@
   color="accent"
   (click)="
     editTreatsSelected = !editTreatsSelected;
-    editDrinksSelected = false && (editSpecialsSelected = false)
+    editDrinksSelected = false;
+    incomingOrdersSelected = false;
+    editFlavorsSelected = false;
   "
 >
   Edit Treats
@@ -24,8 +28,23 @@
   mat-raised-button
   color="accent"
   (click)="
-    incomingOrders = !incomingOrders;
-    editDrinksSelected = false && (editTreatsSelected = false)
+    editFlavorsSelected = !editFlavorsSelected;
+    editTreatsSelected = false;
+    editDrinksSelected = false;
+    incomingOrdersSelected = false;
+  "
+>
+  Edit Flavors
+</button>
+
+<button
+  mat-raised-button
+  color="accent"
+  (click)="
+    incomingOrdersSelected = !incomingOrdersSelected;
+    editTreatsSelected = false;
+    editDrinksSelected = false;
+    editFlavorsSelected = false;
   "
 >
   Incoming Orders
@@ -59,7 +78,7 @@
     <div class="container">
       <h1>Drinks</h1>
       <div class="cardsContainer">
-        <mat-card *ngFor="let item of menuService.drinkItems">
+        <mat-card class="regular" *ngFor="let item of menuService.drinkItems">
           <mat-card-title
             ><strong>{{ item.drinkName }}</strong></mat-card-title
           >
@@ -101,7 +120,7 @@
     <div class="container">
       <h1>Treats</h1>
       <div class="cardsContainer">
-        <mat-card *ngFor="let item of menuService.treatItems">
+        <mat-card class="regular" *ngFor="let item of menuService.treatItems">
           <mat-card-title
             ><strong>{{ item.treatName }}</strong></mat-card-title
           >
@@ -115,23 +134,60 @@
   </div>
 </div>
 
-<div *ngIf="incomingOrders">
+<div *ngIf="editFlavorsSelected">
+  <form #flavorForm="ngForm" (ngSubmit)="menuService.addFlavor(flavorForm)">
+    <mat-form-field>
+      <mat-label>Flavor Name</mat-label>
+      <input ngModel matInput type="text" name="flavorName" required />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="!flavorForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+
   <div class="body">
     <div class="container">
-      <h1>Treats</h1>
+      <h1>Flavors</h1>
       <div class="cardsContainer">
-        <mat-card *ngFor="let order of menuService.incomingOrders">
-          <div *ngFor="let item of order">
-            <mat-card-title
-              ><strong
-                >{{ item.quantity }} {{ item.size }} {{ item.name }}</strong
-              ></mat-card-title
-            >
+        <mat-card class="regular" *ngFor="let item of menuService.flavorItems">
+          <mat-card-title
+            ><strong>{{ item.flavorName }}</strong></mat-card-title
+          >
+          <mat-icon (click)="menuService.onRemoveFlavor(item.id)"
+            >delete</mat-icon
+          >
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <mat-card-content>{{ item.flavors }}</mat-card-content>
-
-            <mat-icon>delete</mat-icon>
+<div *ngIf="incomingOrdersSelected">
+  <div class="body">
+    <div class="container">
+      <h1>Incoming Orders</h1>
+      <div class="cardsContainer">
+        <mat-card
+          class="incomingOrderCard"
+          *ngFor="let order of menuService.incomingOrders"
+        >
+          <div *ngFor="let item of menuService.toArray(order)">
+            <div class="item">
+              <mat-card-title
+                ><strong
+                  >{{ item.quantity }} {{ item.size }} {{ item.name }}</strong
+                ></mat-card-title
+              >
+              <mat-card-title>{{ item.flavors }} </mat-card-title>
+            </div>
           </div>
+          <mat-icon>delete</mat-icon>
         </mat-card>
       </div>
     </div>
