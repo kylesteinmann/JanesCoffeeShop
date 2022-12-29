@@ -1,5 +1,5 @@
 <h1 *ngIf="!menuService.itemsInOrderMessage" class="messageContainer">No items have been added to you order.</h1>
-<div *ngIf="menuService.itemsInOrderMessage">
+<div *ngIf="menuService.itemsInOrderMessage" >
   <div *ngFor="let item of menuService.currentOrder">
     <div class="container">
       <div>

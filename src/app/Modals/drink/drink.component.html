@@ -7,13 +7,14 @@
       <mat-option value='largePrice'> Large {{menuService.currentDrinkSelected.largePrice}}</mat-option>
     </mat-select>
   </mat-form-field>
-
+<mat-dialog-content>
   <div *ngFor="let item of menuService.flavorItems;"  value=drinkForm.value>
 
   <mat-checkbox [name]="item.flavorName" ngModel>
     {{ item.flavorName }}
   </mat-checkbox>
 </div>
+</mat-dialog-content>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Close</button>
     <button mat-button mat-dialog-close type="submit">Add to Order</button>

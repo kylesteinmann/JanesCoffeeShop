@@ -1,54 +1,53 @@
 .body {
-    display: flex;
-    justify-content: center;
-    width: 100vw;
-    background-color: #263238;
-    border: none;
-    margin: 0;
-    padding: 0;
-  }
-  .container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 80vw;
-    background-color: #E0E0E0
-    ;
-    box-shadow: slategray 0px 5px 10px;
-
-  }
-  .cardsContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content:center;
-  }
-  .regular {
-    display: flex;
-    margin: 5px;
-    width: 45%;
-    padding: 5px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .title  {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-
-  }
-  .incomingOrderCard {
-      display: flex;
-      margin: 5px;
-      width: 45%;
-      padding: 5px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-wrap: wrap;
-  }
-.item {
-  padding:5px
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  background-color: #263238;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
+  background-color: #e0e0e0;
+  box-shadow: slategray 0px 5px 10px;
+}
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.regular {
+  display: flex;
+  margin: 5px;
+  width: 45%;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
+.title {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.incomingOrderCard {
+  display: flex;
+  margin: 5px;
+  width: 45%;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.item {
+  padding: 5px;
+}
+mat-card {
+  min-width: 275px;
+}
