@@ -137,6 +137,7 @@ export class MenuService {
       quantity: 1,
       size: drinkData.value.size,
       price: currentPrice,
+      specialInstructions: drinkData.value.specialInstructions
     };
     this.currentOrder.push(drinkDetails);
     this.itemsInOrderMessage = true
@@ -239,6 +240,20 @@ export class MenuService {
 
   toArray(orders: any) {
     return Object.keys(orders).map(key => orders[key])
+  }
+
+  totalPrice() {
+    let totalPrice = 0
+    for(let item of this.currentOrder){
+      totalPrice = totalPrice + (Number(item.quantity) * Number(item.price))
+
+    }
+    return totalPrice
+  }
+  sizeNameConversion(item:string | undefined){
+    if(item == "largePrice") {
+      return "Large"
+    } return "Regular"
   }
 
 }

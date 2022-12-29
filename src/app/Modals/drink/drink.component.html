@@ -1,20 +1,30 @@
 <h1 mat-dialog-title>{{ menuService.currentDrinkSelected.drinkName }}</h1>
-<form #drinkForm="ngForm" (ngSubmit)="menuService.onAddDrinkToOrder(drinkForm, menuService.currentDrinkSelected);">
+<form  #drinkForm="ngForm"  (ngSubmit)="menuService.onAddDrinkToOrder(drinkForm, menuService.currentDrinkSelected)  ">
   <mat-form-field appearance="fill">
     <mat-label>Size</mat-label>
     <mat-select name="size" ngModel>
-      <mat-option value='regularPrice'>Regular {{menuService.currentDrinkSelected.regularPrice}}  </mat-option>
-      <mat-option value='largePrice'> Large {{menuService.currentDrinkSelected.largePrice}}</mat-option>
+      <mat-option value="regularPrice"
+        >Regular {{ menuService.currentDrinkSelected.regularPrice }}
+      </mat-option>
+      <mat-option value="largePrice">
+        Large {{ menuService.currentDrinkSelected.largePrice }}</mat-option
+      >
     </mat-select>
   </mat-form-field>
-<mat-dialog-content>
-  <div *ngFor="let item of menuService.flavorItems;"  value=drinkForm.value>
-
-  <mat-checkbox [name]="item.flavorName" ngModel>
-    {{ item.flavorName }}
-  </mat-checkbox>
-</div>
-</mat-dialog-content>
+  <h2 class="specialInstructions" mat-dialog-content>
+    <div *ngFor="let item of menuService.flavorItems">
+      <mat-checkbox [name]="item.flavorName" ngModel>
+        {{ item.flavorName }}
+      </mat-checkbox>
+    </div>
+  </h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Special Instructions:
+      </mat-label>
+      <input type="text" matInput name="specialInstructions" ngModel />
+    </mat-form-field>
+  </mat-dialog-content>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Close</button>
     <button mat-button mat-dialog-close type="submit">Add to Order</button>

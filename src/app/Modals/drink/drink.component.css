@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+
+}
+mat-dialog-content {
+  height: 100%;
+  padding:0;
+}
+.specialInstructions{
+padding:0;
+margin:0;
+
+}

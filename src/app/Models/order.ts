@@ -5,6 +5,7 @@ export class Order {
   flavors?:string[];
   quantity:number;
   id?: string;
+  specialInstructions?:string;
   constructor(
     name: string,
     price: number,
@@ -12,6 +13,7 @@ export class Order {
     flavors:string[],
     quantity:number,
     id: string,
+    specialInstructions:string
   ) {
     this.name=name;
     this.price = price
@@ -19,5 +21,6 @@ export class Order {
     this.flavors = flavors
     this.quantity = quantity
     this.id=id
+    this.specialInstructions=specialInstructions
   }
 }

@@ -7,6 +7,8 @@ import { MenuService } from 'src/app/Services/menu.service';
   styleUrls: ['./drink.component.css']
 })
 export class DrinkComponent {
-  constructor(public menuService:MenuService){}
+  constructor(public menuService:MenuService){
+    console.log(menuService.flavorItems)
+  }
 
 }

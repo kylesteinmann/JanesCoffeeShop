@@ -1,21 +1,37 @@
-<h1 *ngIf="!menuService.itemsInOrderMessage" class="messageContainer">No items have been added to you order.</h1>
-<div *ngIf="menuService.itemsInOrderMessage" >
+<h3 *ngIf="!menuService.itemsInOrderMessage" class="messageContainer">
+  No items have been added to you order.
+</h3>
+<div *ngIf="menuService.itemsInOrderMessage">
   <div *ngFor="let item of menuService.currentOrder">
     <div class="container">
       <div>
         <h1 mat-dialog-content>
-          {{ item.quantity }} {{ item.size }} {{ item.name }}
+          {{ item.quantity }} -
+          {{ menuService.sizeNameConversion(item.size) }} - {{ item.name }} - ${{ item.price }}
         </h1>
+        <h2 mat-dialog-content>
+          Special Instructions: {{ item.specialInstructions }}
+        </h2>
         <h2 mat-dialog-content>{{ item.flavors }}</h2>
-      </div>
-      <div>
-        <h2 mat-dialog-content>{{ item.price }}</h2>
       </div>
     </div>
     <hr />
   </div>
+  <h2 mat-dialog-content>
+    <strong>Order Sub-total: ${{ menuService.totalPrice() }}</strong>
+  </h2>
   <div class="buttons">
-    <button mat-button mat-dialog-close (click)="menuService.onSubmitOrder()">Submit Order</button>
-    <button mat-button mat-dialog-close (click)="menuService.currentOrder = []; menuService.itemsInOrderMessage = false">Clear Order</button>
+    <button mat-button mat-dialog-close (click)="menuService.onSubmitOrder()">
+      Submit Order
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      (click)="
+        menuService.currentOrder = []; menuService.itemsInOrderMessage = false
+      "
+    >
+      Clear Order
+    </button>
   </div>
 </div>
