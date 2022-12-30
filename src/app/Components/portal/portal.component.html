@@ -1,55 +1,56 @@
-<button
-  mat-raised-button
-  color="accent"
-  (click)="
-    editDrinksSelected = !editDrinksSelected;
-    editTreatsSelected = false;
-    editFlavorsSelected = false;
-    incomingOrdersSelected = false;
-  "
->
-  Edit Drinks
-</button>
+<div class="buttonsContainer">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="
+      editDrinksSelected = !editDrinksSelected;
+      editTreatsSelected = false;
+      editFlavorsSelected = false;
+      incomingOrdersSelected = false
+    "
+  >
+    Edit Drinks
+  </button>
 
-<button
-  mat-raised-button
-  color="accent"
-  (click)="
-    editTreatsSelected = !editTreatsSelected;
-    editDrinksSelected = false;
-    incomingOrdersSelected = false;
-    editFlavorsSelected = false;
-  "
->
-  Edit Treats
-</button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="
+      editTreatsSelected = !editTreatsSelected;
+      editDrinksSelected = false;
+      incomingOrdersSelected = false;
+      editFlavorsSelected = false
+    "
+  >
+    Edit Treats
+  </button>
 
-<button
-  mat-raised-button
-  color="accent"
-  (click)="
-    editFlavorsSelected = !editFlavorsSelected;
-    editTreatsSelected = false;
-    editDrinksSelected = false;
-    incomingOrdersSelected = false;
-  "
->
-  Edit Flavors
-</button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="
+      editFlavorsSelected = !editFlavorsSelected;
+      editTreatsSelected = false;
+      editDrinksSelected = false;
+      incomingOrdersSelected = false
+    "
+  >
+    Edit Flavors
+  </button>
 
-<button
-  mat-raised-button
-  color="accent"
-  (click)="
-    incomingOrdersSelected = !incomingOrdersSelected;
-    editTreatsSelected = false;
-    editDrinksSelected = false;
-    editFlavorsSelected = false;
-  "
->
-  Incoming Orders
-</button>
-
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="
+      incomingOrdersSelected = !incomingOrdersSelected;
+      editTreatsSelected = false;
+      editDrinksSelected = false;
+      editFlavorsSelected = false
+    "
+  >
+    Incoming Orders
+  </button>
+</div>
 <div *ngIf="editDrinksSelected">
   <form #drinkForm="ngForm" (ngSubmit)="menuService.addDrink(drinkForm)">
     <mat-form-field>
@@ -181,13 +182,18 @@
             <div class="item">
               <mat-card-title
                 ><strong
-                  >{{ item.quantity }} {{ item.size }} {{ item.name }}</strong
+                  >{{ item.quantity }}
+                  {{ menuService.sizeNameConversion(item.size) }}
+                  {{ item.name }}</strong
                 ></mat-card-title
               >
-              <mat-card-title>{{ item.flavors }} </mat-card-title>
+              <mat-card-title> {{ item.flavors }} </mat-card-title>
             </div>
+            <mat-card-title>{{ item.specialInstructions }} </mat-card-title>
           </div>
-          <mat-icon>delete</mat-icon>
+          <mat-icon (click)="menuService.onRemoveIncomingOrder(order.id)"
+            >delete</mat-icon
+          >
         </mat-card>
       </div>
     </div>

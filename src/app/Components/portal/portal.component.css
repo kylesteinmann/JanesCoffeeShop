@@ -56,3 +56,14 @@ mat-card {
   max-width: 350px;
   width: 45%;
 }
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin:10px;
+  flex-wrap: wrap;
+}
+button {
+  margin:10px
+}

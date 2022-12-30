@@ -122,8 +122,10 @@ export class MenuService {
   onAddDrinkToOrder(drinkData: NgForm, currentDrink: any) {
     const flavorKeys = Object.keys(drinkData.value);
     const filteredFlavorKeys = flavorKeys.filter((key) => {
-      if (key !== 'size') {
-        return drinkData.value[key];
+      if (key !== 'specialInstructions') {
+        if (key !== 'size') {
+          return drinkData.value[key];
+        }
       }
     });
     const currentPrice =
@@ -137,10 +139,11 @@ export class MenuService {
       quantity: 1,
       size: drinkData.value.size,
       price: currentPrice,
-      specialInstructions: drinkData.value.specialInstructions
+      specialInstructions: 'Special Instructions: ' + drinkData.value.specialInstructions
     };
     this.currentOrder.push(drinkDetails);
     this.itemsInOrderMessage = true
+    console.log(drinkData.value)
 
   }
 
@@ -234,27 +237,43 @@ export class MenuService {
         })
       )
       .subscribe((ordersData) => {
-        this.incomingOrders = ordersData;
-      });
-  }
 
-  toArray(orders: any) {
-    return Object.keys(orders).map(key => orders[key])
-  }
+        this.incomingOrders = ordersData
+          console.log(ordersData[0])
+         ;
+  });
+}
 
-  totalPrice() {
-    let totalPrice = 0
-    for(let item of this.currentOrder){
-      totalPrice = totalPrice + (Number(item.quantity) * Number(item.price))
+onRemoveIncomingOrder(id: any) {
+  this.http
+    .delete(
+      'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/orders/' +
+      id +
+      '.json'
+    )
+    .subscribe(() => {
 
-    }
-    return totalPrice
+      this.fetchIncomeingOrdersData();
+    });
+}
+
+toArray(orders: any) {
+  return Object.keys(orders).map(key => orders[key])
+}
+
+totalPrice() {
+  let totalPrice = 0
+  for (let item of this.currentOrder) {
+    totalPrice = totalPrice + (Number(item.quantity) * Number(item.price))
+
   }
-  sizeNameConversion(item:string | undefined){
-    if(item == "largePrice") {
-      return "Large"
-    } return "Regular"
-  }
+  return totalPrice
+}
+sizeNameConversion(item: string | undefined) {
+  if (item == "largePrice") {
+    return "Large"
+  } return "Regular"
+}
 
 }
 
