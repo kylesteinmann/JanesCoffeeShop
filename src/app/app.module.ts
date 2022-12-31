@@ -24,9 +24,10 @@ import { PortalComponent } from './Components/portal/portal.component';
 import { DrinkComponent } from './Modals/drink/drink.component';
 import { TreatComponent } from './Modals/treat/treat.component';
 import { OrderComponent } from './Modals/order/order.component';
+import { AuthComponent } from './Components/auth/auth.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, PortalComponent, DrinkComponent, TreatComponent, MenuComponent, OrderComponent],
+  declarations: [AppComponent, HeaderComponent, PortalComponent, DrinkComponent, TreatComponent, MenuComponent, OrderComponent, AuthComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
