@@ -67,3 +67,11 @@ mat-card {
 button {
   margin:10px
 }
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+
+}
+

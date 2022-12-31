@@ -52,28 +52,30 @@
   </button>
 </div>
 <div *ngIf="editDrinksSelected">
-  <form #drinkForm="ngForm" (ngSubmit)="menuService.addDrink(drinkForm)">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input ngModel matInput type="text" name="drinkName" required />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Reg. Price</mat-label>
-      <input ngModel matInput type="text" name="regularPrice" required />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Lg. Price</mat-label>
-      <input ngModel matInput type="text" name="largePrice" required />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="accent"
-      type="submit"
-      [disabled]="!drinkForm.valid"
-    >
-      Submit
-    </button>
-  </form>
+  <div class="formContainer">
+    <form #drinkForm="ngForm" (ngSubmit)="menuService.addDrink(drinkForm)">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input ngModel matInput type="text" name="drinkName" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Reg. Price</mat-label>
+        <input ngModel matInput type="text" name="regularPrice" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Lg. Price</mat-label>
+        <input ngModel matInput type="text" name="largePrice" required />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="!drinkForm.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
 
   <div class="body">
     <div class="container">
@@ -97,25 +99,27 @@
 </div>
 
 <div *ngIf="editTreatsSelected">
-  <form #treatForm="ngForm" (ngSubmit)="menuService.addTreat(treatForm)">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input ngModel matInput type="text" name="treatName" required />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Reg. Price</mat-label>
-      <input ngModel matInput type="text" name="regularPrice" required />
-    </mat-form-field>
+  <div class="formContainer">
+    <form #treatForm="ngForm" (ngSubmit)="menuService.addTreat(treatForm)">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input ngModel matInput type="text" name="treatName" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Reg. Price</mat-label>
+        <input ngModel matInput type="text" name="regularPrice" required />
+      </mat-form-field>
 
-    <button
-      mat-raised-button
-      color="accent"
-      type="submit"
-      [disabled]="!treatForm.valid"
-    >
-      Submit
-    </button>
-  </form>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="!treatForm.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
 
   <div class="body">
     <div class="container">
@@ -136,22 +140,23 @@
 </div>
 
 <div *ngIf="editFlavorsSelected">
-  <form #flavorForm="ngForm" (ngSubmit)="menuService.addFlavor(flavorForm)">
-    <mat-form-field>
-      <mat-label>Flavor Name</mat-label>
-      <input ngModel matInput type="text" name="flavorName" required />
-    </mat-form-field>
+  <div class="formContainer">
+    <form #flavorForm="ngForm" (ngSubmit)="menuService.addFlavor(flavorForm)">
+      <mat-form-field>
+        <mat-label>Flavor Name</mat-label>
+        <input ngModel matInput type="text" name="flavorName" required />
+      </mat-form-field>
 
-    <button
-      mat-raised-button
-      color="accent"
-      type="submit"
-      [disabled]="!flavorForm.valid"
-    >
-      Submit
-    </button>
-  </form>
-
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="!flavorForm.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
   <div class="body">
     <div class="container">
       <h1>Flavors</h1>

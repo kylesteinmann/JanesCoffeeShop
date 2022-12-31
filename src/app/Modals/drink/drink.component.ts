@@ -8,7 +8,7 @@ import { MenuService } from 'src/app/Services/menu.service';
 })
 export class DrinkComponent {
   constructor(public menuService:MenuService){
-    console.log(menuService.flavorItems)
+
   }
 
 }

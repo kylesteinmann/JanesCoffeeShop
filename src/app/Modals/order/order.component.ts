@@ -9,7 +9,7 @@ import { MenuService } from 'src/app/Services/menu.service';
 export class OrderComponent {
 
   constructor(public menuService:MenuService){
-    console.log(menuService.currentOrder)
+
   }
 
 }
