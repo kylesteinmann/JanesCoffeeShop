@@ -9,6 +9,7 @@ import { DrinkComponent } from '../Modals/drink/drink.component';
 import { TreatComponent } from '../Modals/treat/treat.component';
 import { OrderComponent } from '../Modals/order/order.component';
 import { Order } from '../Models/order';
+import { Flavor } from '../Models/flavor';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ import { Order } from '../Models/order';
 export class MenuService {
   drinkItems: Drink[] = [];
   treatItems: Treat[] = [];
-  flavorItems: any[] = [];
+  flavorItems: Flavor[] = [];
   currentDrinkSelected: any;
   currentTreatSelected: any;
   currentOrder: Order[] = [];
@@ -143,7 +144,7 @@ export class MenuService {
     };
     this.currentOrder.push(drinkDetails);
     this.itemsInOrderMessage = true
-    console.log(drinkData.value)
+
 
   }
 
@@ -238,9 +239,7 @@ export class MenuService {
       )
       .subscribe((ordersData) => {
 
-        this.incomingOrders = ordersData
-          console.log(ordersData[0])
-         ;
+        this.incomingOrders = ordersData;
   });
 }
 
@@ -261,7 +260,7 @@ toArray(orders: any) {
   return Object.keys(orders).map(key => orders[key])
 }
 
-totalPrice() {
+SubtotalPrice() {
   let totalPrice = 0
   for (let item of this.currentOrder) {
     totalPrice = totalPrice + (Number(item.quantity) * Number(item.price))
@@ -270,9 +269,11 @@ totalPrice() {
   return totalPrice
 }
 sizeNameConversion(item: string | undefined) {
-  if (item == "largePrice") {
+  if(item == undefined){
+    return ""}
+  else if (item == "largePrice") {
     return "Large"
-  } return "Regular"
+  } else return "Regular"
 }
 
 }

@@ -6,8 +6,8 @@
     <div class="container">
       <div>
         <h1 mat-dialog-content> <strong>
-          {{ item.quantity }} -
-          {{ menuService.sizeNameConversion(item.size) }} -
+          {{ item.quantity }}
+          {{ menuService.sizeNameConversion(item.size) }}
           {{ item.name }} -
           ${{ item.price }}
         </strong></h1>
@@ -21,7 +21,7 @@
     <hr />
   </div>
   <h2 mat-dialog-content>
-    <strong>Order Sub-total: ${{ menuService.totalPrice() }}</strong>
+    <strong>Order Sub-total: ${{ menuService.SubtotalPrice() }}</strong>
   </h2>
   <div class="buttons">
     <button mat-button mat-dialog-close (click)="menuService.onSubmitOrder()">
