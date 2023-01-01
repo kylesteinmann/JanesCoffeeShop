@@ -4,7 +4,6 @@
   <mat-icon color="accent" [matMenuTriggerFor]="beforeMenu">menu</mat-icon>
   <mat-menu #beforeMenu="matMenu" xPosition="before">
     <button mat-menu-item routerLink="/">Menu</button>
-    <button mat-menu-item routerLink="/portal">Portal</button>
   </mat-menu>
 <img src="/assets/JanesCoffeeShopLogo.png" alt="Logo" />
   <mat-icon color="accent" matBadge="menuService.currentOrder.length()" [matBadgeHidden]="!menuService.itemsInOrderMessage" matBadgeColor="accent" (click)="menuService.openOrderDialog()">free_breakfast</mat-icon>

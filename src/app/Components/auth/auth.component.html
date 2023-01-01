@@ -1,19 +1,20 @@
 <div class="container">
   <mat-card class="card"
-    ><form #authForm="ngForm" (ngSubmit)="authService.onSubmitAuth(authForm)">
+    ><form #authForm="ngForm" (ngSubmit)="authService.login(authForm.value.email, authForm.value.password)">
       <mat-form-field>
         <mat-label for="email">Email</mat-label>
-        <input type="text" id="email" matInput name="email" required email />
+        <input type="text" id="email" matInput name="email" required ngModel/>
       </mat-form-field>
       <mat-form-field>
         <mat-label for="password">Password</mat-label>
         <input
-          type="text"
+          type="password"
           id="password"
           matInput
           name="password"
           required
           minlength="6"
+          ngModel
       /></mat-form-field>
       <button color="accent" type="submit" mat-raised-button>Submit</button>
     </form></mat-card

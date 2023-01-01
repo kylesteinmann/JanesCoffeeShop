@@ -3,16 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './Components/auth/auth.component';
 import { MenuComponent } from './Components/menu/menu.component';
 import { PortalComponent } from './Components/portal/portal.component';
+import { AuthGuardService } from './Services/auth-guard.service';
 
 const routes: Routes = [
-  {path: 'portal', component:PortalComponent},
-  {path: '', component:MenuComponent},
-  {path:'auth', component:AuthComponent}
-
+  {
+    path: 'portal',
+    component: PortalComponent,
+    canActivate: [AuthGuardService]
+  },
+  { path: '', component: MenuComponent },
+  { path: 'login', component: AuthComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

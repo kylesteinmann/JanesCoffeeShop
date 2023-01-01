@@ -1,13 +1,49 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { AuthResponse } from '../Models/auth-response';
+import { User } from '../Models/user';
+import { Subject, tap } from 'rxjs';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  user = new Subject<User>();
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmitAuth(authData: any) {
-    console.log(authData);
+
     authData.reset();
+  }
+
+  login(email: string, password: string) {
+    this.http
+      .post<AuthResponse>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCaPvHJ_ni0-7oVrP_BbRsKjlvP6AfafHs',
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        tap((resData) => {
+          const expirationDate = new Date(
+            new Date().getTime() + +resData.expiresIn * 1000
+          );
+          const user = new User(
+            resData.email,
+            resData.localId,
+            resData.idToken,
+            expirationDate
+          );
+          this.user.next(user);
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['/portal']);
+
+
+      });
   }
 }
