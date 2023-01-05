@@ -1,6 +1,8 @@
-<div class="container">
-  <mat-card class="card"
-    ><form #authForm="ngForm" (ngSubmit)="authService.login(authForm.value.email, authForm.value.password)">
+
+<div class="container" >
+  <div *ngIf="authService.isLoading"><app-loading-spinner></app-loading-spinner></div>
+  <mat-card class="card" *ngIf="!authService.isLoading"
+    ><form #authForm="ngForm"  (ngSubmit)="authService.login(authForm.value.email, authForm.value.password)">
       <mat-form-field>
         <mat-label for="email">Email</mat-label>
         <input type="text" id="email" matInput name="email" required ngModel/>

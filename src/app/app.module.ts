@@ -14,20 +14,30 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatBadgeModule} from '@angular/material/badge';
-
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
-import { MenuComponent} from './Components/menu/menu.component'
+import { MenuComponent } from './Components/menu/menu.component';
 import { PortalComponent } from './Components/portal/portal.component';
 import { DrinkComponent } from './Modals/drink/drink.component';
 import { TreatComponent } from './Modals/treat/treat.component';
 import { OrderComponent } from './Modals/order/order.component';
 import { AuthComponent } from './Components/auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, PortalComponent, DrinkComponent, TreatComponent, MenuComponent, OrderComponent, AuthComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    PortalComponent,
+    DrinkComponent,
+    TreatComponent,
+    MenuComponent,
+    OrderComponent,
+    AuthComponent,
+    LoadingSpinnerComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,8 +54,7 @@ import { AuthComponent } from './Components/auth/auth.component';
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatBadgeModule
-
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
