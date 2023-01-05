@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  user = new Subject<User>();
+  user = new Subject<User | null>();
+  isLoading = false;
+  error = null
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmitAuth(authData: any) {
@@ -17,6 +19,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+    this.isLoading = true;
     this.http
       .post<AuthResponse>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCaPvHJ_ni0-7oVrP_BbRsKjlvP6AfafHs',
@@ -42,8 +45,9 @@ export class AuthService {
       )
       .subscribe(() => {
         this.router.navigate(['/portal']);
-
-
+        this.isLoading = false
       });
   }
+
+
 }
