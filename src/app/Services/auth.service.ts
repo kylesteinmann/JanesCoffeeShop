@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
 import { AuthResponse } from '../Models/auth-response';
 import { User } from '../Models/user';
 import { Subject, tap } from 'rxjs';
 import { Router } from '@angular/router';
-@Injectable({
-  providedIn: 'root',
-})
+
+// @Injectable({
+//   providedIn: 'root',
+// })
+
 export class AuthService {
   user = new Subject<User | null>();
   isLoading = false;
