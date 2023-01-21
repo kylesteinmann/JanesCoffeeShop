@@ -1,4 +1,4 @@
-// import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Drink } from '../Models/drink';
 import { Treat } from '../Models/treat';
@@ -11,9 +11,9 @@ import { OrderComponent } from '../Modals/order/order.component';
 import { Order } from '../Models/order';
 import { Flavor } from '../Models/flavor';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
+@Injectable({
+  providedIn: 'root',
+})
 
 export class MenuService {
   drinkItems: Drink[] = [];

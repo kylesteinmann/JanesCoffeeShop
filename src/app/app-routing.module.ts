@@ -6,13 +6,14 @@ import { PortalComponent } from './Components/portal/portal.component';
 import { AuthGuardService } from './Services/auth-guard.service';
 
 const routes: Routes = [
+  { path: 'login', component: AuthComponent },
   {
     path: 'portal',
     component: PortalComponent,
     canActivate: [AuthGuardService]
   },
   { path: '', component: MenuComponent },
-  { path: 'login', component: AuthComponent },
+
 ];
 
 @NgModule({
