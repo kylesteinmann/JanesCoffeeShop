@@ -1,4 +1,4 @@
-// import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Drink } from '../Models/drink';
 import { Treat } from '../Models/treat';
@@ -10,10 +10,12 @@ import { TreatComponent } from '../Modals/treat/treat.component';
 import { OrderComponent } from '../Modals/order/order.component';
 import { Order } from '../Models/order';
 import { Flavor } from '../Models/flavor';
+import { Database } from '../Models/database';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
+
+@Injectable({
+  providedIn: 'root',
+})
 
 export class MenuService {
   drinkItems: Drink[] = [];
@@ -31,7 +33,7 @@ export class MenuService {
   addDrink(drinkData: NgForm) {
     this.http
       .post(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks.json',
+        Database.url + 'drinks.json',
         drinkData.value
       )
       .subscribe();
@@ -42,7 +44,7 @@ export class MenuService {
   fetchDrinkData() {
     this.http
       .get<{ [key: string]: Drink }>(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks.json'
+        Database.url + 'drinks.json'
       )
       .pipe(
         map((responseData) => {
@@ -62,9 +64,7 @@ export class MenuService {
   onRemoveDrink(id: any) {
     this.http
       .delete(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/drinks/' +
-        id +
-        '.json'
+        Database.url + 'drinks/' + id + '.json'
       )
       .subscribe(() => {
 
@@ -75,7 +75,7 @@ export class MenuService {
   addTreat(treatsData: NgForm) {
     this.http
       .post(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/treats.json',
+        Database.url + 'treats.json',
         treatsData.value
       )
       .subscribe();
@@ -86,7 +86,7 @@ export class MenuService {
   fetchTreatData() {
     this.http
       .get<{ [key: string]: Treat }>(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/treats.json'
+        Database.url + 'treats.json'
       )
       .pipe(
         map((responseData) => {
@@ -106,7 +106,7 @@ export class MenuService {
   onRemovetreat(id: any) {
     this.http
       .delete(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/treats/' +
+        Database.url + 'treats/' +
         id +
         '.json'
       )
@@ -169,7 +169,7 @@ export class MenuService {
   addFlavor(flavorData: NgForm) {
     this.http
       .post(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/flavors.json',
+        Database.url + 'flavors.json',
         flavorData.value
       )
       .subscribe(() => {
@@ -182,7 +182,7 @@ export class MenuService {
   fetchFlavorData() {
     this.http
       .get<{ [key: string]: Treat }>(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/flavors.json'
+        Database + '/flavors.json'
       )
       .pipe(
         map((responseData) => {
@@ -202,7 +202,7 @@ export class MenuService {
   onRemoveFlavor(id: any) {
     this.http
       .delete(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/flavors/' +
+        Database.url + 'flavors/' +
         id +
         '.json'
       )
@@ -217,7 +217,7 @@ export class MenuService {
   }
 
   onSubmitOrder() {
-    this.http.post('https://janescoffeehouse-78763-default-rtdb.firebaseio.com/orders.json', this.currentOrder).subscribe(() => {
+    this.http.post(Database.url + 'orders.json', this.currentOrder).subscribe(() => {
       this.itemsInOrderMessage = false
       this.currentOrder = []
     }
@@ -227,7 +227,7 @@ export class MenuService {
   fetchIncomeingOrdersData() {
     this.http
       .get<{ [key: string]: Order }>(
-        'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/orders.json'
+        Database.url + 'orders.json'
       )
       .pipe(
         map((responseData) => {
@@ -247,7 +247,7 @@ export class MenuService {
 onRemoveIncomingOrder(id: any) {
   this.http
     .delete(
-      'https://janescoffeehouse-78763-default-rtdb.firebaseio.com/orders/' +
+      Database.url + 'orders/' +
       id +
       '.json'
     )
