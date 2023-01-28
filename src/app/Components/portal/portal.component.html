@@ -53,7 +53,12 @@
 </div>
 <div *ngIf="editDrinksSelected">
   <div class="formContainer">
-    <form #drinkForm="ngForm" (ngSubmit)="menuService.addDrink(drinkForm)">
+    <form
+      #drinkForm="ngForm"
+      (ngSubmit)="
+        menuService.addDrink(drinkForm.value); menuService.resetForm(drinkForm)
+      "
+    >
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input ngModel matInput type="text" name="drinkName" required />
@@ -100,7 +105,12 @@
 
 <div *ngIf="editTreatsSelected">
   <div class="formContainer">
-    <form #treatForm="ngForm" (ngSubmit)="menuService.addTreat(treatForm)">
+    <form
+      #treatForm="ngForm"
+      (ngSubmit)="
+        menuService.addTreat(treatForm.value); menuService.resetForm(treatForm)
+      "
+    >
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input ngModel matInput type="text" name="treatName" required />
@@ -141,7 +151,13 @@
 
 <div *ngIf="editFlavorsSelected">
   <div class="formContainer">
-    <form #flavorForm="ngForm" (ngSubmit)="menuService.addFlavor(flavorForm)">
+    <form
+      #flavorForm="ngForm"
+      (ngSubmit)="
+        menuService.addFlavor(flavorForm.value);
+        menuService.resetForm(flavorForm)
+      "
+    >
       <mat-form-field>
         <mat-label>Flavor Name</mat-label>
         <input ngModel matInput type="text" name="flavorName" required />

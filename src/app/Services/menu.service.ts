@@ -12,11 +12,9 @@ import { Order } from '../Models/order';
 import { Flavor } from '../Models/flavor';
 import { Database } from './database';
 
-
 @Injectable({
   providedIn: 'root',
 })
-
 export class MenuService {
   drinkItems: Drink[] = [];
   treatItems: Treat[] = [];
@@ -25,28 +23,32 @@ export class MenuService {
   currentTreatSelected: any;
   currentOrder: Order[] = [];
   incomingOrders: any = [];
-  itemsInOrderMessage = false
+  itemsInOrderMessage = false;
 
-  constructor(private http: HttpClient, public dialog: MatDialog) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) {
 
-  addDrink(drinkData: NgForm) {
-    this.http
-      .post(Database.url + 'drinks.json', drinkData.value)
-      .subscribe();
-    this.drinkItems.push(drinkData.value);
-    drinkData.resetForm();
+  }
+
+  addDrink(drinkData: Drink ) {
+    console.log(drinkData)
+    this.http.post(Database.url + 'drinks.json', drinkData)
+    .subscribe(() => {
+    this.drinkItems.push(drinkData);
+
+    })
   }
 
   fetchDrinkData() {
     this.http
       .get<{ [key: string]: Drink }>(Database.url + 'drinks.json')
-      .pipe(map((responseData) => {
-        const drinks = [];
-        for (const key in responseData) {
-          drinks.push({ ...responseData[key], id: key });
-        }
-        return drinks;
-      })
+      .pipe(
+        map((responseData) => {
+          const drinks = [];
+          for (const key in responseData) {
+            drinks.push({ ...responseData[key], id: key });
+          }
+          return drinks;
+        })
       )
       .subscribe((drinksData) => {
         this.drinkItems = drinksData;
@@ -54,21 +56,22 @@ export class MenuService {
   }
 
   onRemoveDrink(id: any) {
-    this.http.delete(Database.url + 'drinks/' + id + '.json'
-      ).subscribe(() => {
-        this.fetchDrinkData();
-      });
+    this.http.delete(Database.url + 'drinks/' + id + '.json').subscribe(() => {
+      this.fetchDrinkData();
+    });
   }
 
-  addTreat(treatsData: NgForm) {
-    this.http.post(Database.url + 'treats.json', treatsData.value).subscribe();
-    this.drinkItems.push(treatsData.value);
-    treatsData.resetForm();
+  addTreat(treatsData: Treat) {
+    this.http.post(Database.url + 'treats.json', treatsData).subscribe();
+    this.treatItems.push(treatsData);
+
   }
 
   fetchTreatData() {
-    this.http.get<{ [key: string]: Treat }>(Database.url + 'treats.json')
-      .pipe(map((responseData) => {
+    this.http
+      .get<{ [key: string]: Treat }>(Database.url + 'treats.json')
+      .pipe(
+        map((responseData) => {
           const treats: any[] = [];
           for (const key in responseData) {
             treats.push({ ...responseData[key], id: key });
@@ -82,10 +85,9 @@ export class MenuService {
   }
 
   onRemovetreat(id: any) {
-    this.http.delete(Database.url + 'treats/' + id + '.json'
-      ).subscribe(() => {
-        this.fetchTreatData();
-      });
+    this.http.delete(Database.url + 'treats/' + id + '.json').subscribe(() => {
+      this.fetchTreatData();
+    });
   }
 
   openDrinksDialog(drinkInfo: any) {
@@ -102,17 +104,21 @@ export class MenuService {
         }
       }
     });
-    const currentPrice = drinkData.value.size === 'regularPrice' ? currentDrink.regularPrice : currentDrink.largePrice;
+    const currentPrice =
+      drinkData.value.size === 'regularPrice'
+        ? currentDrink.regularPrice
+        : currentDrink.largePrice;
     const drinkDetails = {
       name: currentDrink.drinkName,
       flavors: filteredFlavorKeys,
       quantity: 1,
       size: drinkData.value.size,
       price: currentPrice,
-      specialInstructions: 'Special Instructions: ' + drinkData.value.specialInstructions
+      specialInstructions:
+        'Special Instructions: ' + drinkData.value.specialInstructions,
     };
     this.currentOrder.push(drinkDetails);
-    this.itemsInOrderMessage = true
+    this.itemsInOrderMessage = true;
   }
 
   openTreatsDialog(treatInfo: any) {
@@ -127,22 +133,22 @@ export class MenuService {
       price: currentTreat.regularPrice,
     };
     this.currentOrder.push(treatDetails);
-    this.itemsInOrderMessage = true
+    this.itemsInOrderMessage = true;
   }
 
-  addFlavor(flavorData: NgForm) {
-    this.http.post(Database.url + 'flavors.json', flavorData.value)
+  addFlavor(flavorData: Flavor) {
+    this.http
+      .post(Database.url + 'flavors.json', flavorData)
       .subscribe(() => {
-        this.fetchFlavorData()
-        flavorData.resetForm();
+        this.fetchFlavorData();
       });
-
   }
 
   fetchFlavorData() {
-    this.http.get<{ [key: string]: Treat }>(
-        Database.url + '/flavors.json'
-      ).pipe(map((responseData) => {
+    this.http
+      .get<{ [key: string]: Treat }>(Database.url + '/flavors.json')
+      .pipe(
+        map((responseData) => {
           const flavors: any[] = [];
           for (const key in responseData) {
             flavors.push({ ...responseData[key], id: key });
@@ -156,10 +162,9 @@ export class MenuService {
   }
 
   onRemoveFlavor(id: any) {
-    this.http.delete(Database.url + 'flavors/' + id + '.json'
-      ).subscribe(() => {
-        this.fetchFlavorData();
-      });
+    this.http.delete(Database.url + 'flavors/' + id + '.json').subscribe(() => {
+      this.fetchFlavorData();
+    });
   }
 
   openOrderDialog() {
@@ -167,17 +172,19 @@ export class MenuService {
   }
 
   onSubmitOrder() {
-    this.http.post(Database.url + 'orders.json', this.currentOrder).subscribe(() => {
-      this.itemsInOrderMessage = false
-      this.currentOrder = []
-    }
-    )
+    this.http
+      .post(Database.url + 'orders.json', this.currentOrder)
+      .subscribe(() => {
+        this.itemsInOrderMessage = false;
+        this.currentOrder = [];
+      });
   }
 
   fetchIncomeingOrdersData() {
-    this.http.get<{ [key: string]: Order }>(
-        Database.url + 'orders.json'
-      ).pipe(map((responseData) => {
+    this.http
+      .get<{ [key: string]: Order }>(Database.url + 'orders.json')
+      .pipe(
+        map((responseData) => {
           const orders: any[] = [];
           for (const key in responseData) {
             orders.push({ ...responseData[key], id: key });
@@ -191,32 +198,33 @@ export class MenuService {
   }
 
   onRemoveIncomingOrder(id: any) {
-    this.http.delete(Database.url + 'orders/' + id + '.json')
-    .subscribe(() => {
-        this.fetchIncomeingOrdersData();
-      });
+    this.http.delete(Database.url + 'orders/' + id + '.json').subscribe(() => {
+      this.fetchIncomeingOrdersData();
+    });
   }
 
   toArray(orders: any) {
-    return Object.keys(orders).map(key => orders[key])
+    return Object.keys(orders).map((key) => orders[key]);
   }
 
   SubtotalPrice() {
-    let totalPrice = 0
+    let totalPrice = 0;
     for (let item of this.currentOrder) {
-      totalPrice = totalPrice + (Number(item.quantity) * Number(item.price))
-
+      totalPrice = totalPrice + Number(item.quantity) * Number(item.price);
     }
-    return totalPrice
+    return totalPrice;
   }
+
   sizeNameConversion(item: string | undefined) {
     if (item == undefined) {
-      return ""
-    }
-    else if (item == "largePrice") {
-      return "Large"
-    } else return "Regular"
+      return '';
+    } else if (item == 'largePrice') {
+      return 'Large';
+    } else return 'Regular';
+  }
+
+  resetForm(form: NgForm) {
+    form.resetForm()
   }
 
 }
-
