@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Drink } from '../Models/drink';
 import { Treat } from '../Models/treat';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { interval, map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DrinkComponent } from '../Modals/drink/drink.component';
 import { TreatComponent } from '../Modals/treat/treat.component';
@@ -11,6 +11,7 @@ import { OrderComponent } from '../Modals/order/order.component';
 import { Order } from '../Models/order';
 import { Flavor } from '../Models/flavor';
 import { Database } from './database';
+
 
 @Injectable({
   providedIn: 'root',
@@ -25,17 +26,17 @@ export class MenuService {
   incomingOrders: any = [];
   itemsInOrderMessage = false;
 
-  constructor(private http: HttpClient, public dialog: MatDialog) {
 
+  constructor(private http: HttpClient, public dialog: MatDialog
+  ) {
+    interval(10000).subscribe(()=> this.fetchIncomeingOrdersData())
   }
 
-  addDrink(drinkData: Drink ) {
-    console.log(drinkData)
-    this.http.post(Database.url + 'drinks.json', drinkData)
-    .subscribe(() => {
-    this.drinkItems.push(drinkData);
-
-    })
+  addDrink(drinkData: Drink) {
+    console.log(drinkData);
+    this.http.post(Database.url + 'drinks.json', drinkData).subscribe(() => {
+      this.drinkItems.push(drinkData);
+    });
   }
 
   fetchDrinkData() {
@@ -50,7 +51,7 @@ export class MenuService {
           return drinks;
         })
       )
-      .subscribe((drinksData) => {
+      .subscribe((drinksData: any) => {
         this.drinkItems = drinksData;
       });
   }
@@ -64,7 +65,6 @@ export class MenuService {
   addTreat(treatsData: Treat) {
     this.http.post(Database.url + 'treats.json', treatsData).subscribe();
     this.treatItems.push(treatsData);
-
   }
 
   fetchTreatData() {
@@ -79,7 +79,7 @@ export class MenuService {
           return treats;
         })
       )
-      .subscribe((treatsData) => {
+      .subscribe((treatsData: any) => {
         this.treatItems = treatsData;
       });
   }
@@ -137,11 +137,9 @@ export class MenuService {
   }
 
   addFlavor(flavorData: Flavor) {
-    this.http
-      .post(Database.url + 'flavors.json', flavorData)
-      .subscribe(() => {
-        this.fetchFlavorData();
-      });
+    this.http.post(Database.url + 'flavors.json', flavorData).subscribe(() => {
+      this.fetchFlavorData();
+    });
   }
 
   fetchFlavorData() {
@@ -156,7 +154,7 @@ export class MenuService {
           return flavors;
         })
       )
-      .subscribe((flavorData) => {
+      .subscribe((flavorData: any) => {
         this.flavorItems = flavorData;
       });
   }
@@ -192,7 +190,7 @@ export class MenuService {
           return orders;
         })
       )
-      .subscribe((ordersData) => {
+      .subscribe((ordersData: any) => {
         this.incomingOrders = ordersData;
       });
   }
@@ -224,7 +222,6 @@ export class MenuService {
   }
 
   resetForm(form: NgForm) {
-    form.resetForm()
+    form.resetForm();
   }
-
 }

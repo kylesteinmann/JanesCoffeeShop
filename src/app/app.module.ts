@@ -16,6 +16,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatBadgeModule } from '@angular/material/badge';
 
+
+
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { MenuComponent } from './Components/menu/menu.component';
@@ -55,6 +58,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     MatSelectModule,
     MatCheckboxModule,
     MatBadgeModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],
