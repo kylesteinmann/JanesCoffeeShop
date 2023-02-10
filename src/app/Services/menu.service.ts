@@ -171,8 +171,8 @@ export class MenuService {
   }
 
   onSubmitOrder() {
-    this.http.post("127.0.0.1:3000/order_details.json", this.currentOrder).subscribe()
-    
+    this.http.post("http://127.0.0.1:3000/orders.json", this.currentOrder).subscribe(response => console.log(response))
+
     // this.http
     //   .post(Database.url + 'orders.json', this.currentOrder)
     //   .subscribe(() => {
@@ -180,7 +180,7 @@ export class MenuService {
     //     this.currentOrder = [];
     //   });
 
-    
+
   }
 
   fetchIncomeingOrdersData() {
