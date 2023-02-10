@@ -25,12 +25,12 @@ export class MenuService {
   currentOrder: Order[] = [];
   incomingOrders: any = [];
   itemsInOrderMessage = false;
-  
+
 
 
   constructor(private http: HttpClient, public dialog: MatDialog
   ) {
-    interval(10000).subscribe(()=> this.fetchIncomeingOrdersData())
+    interval(10000).subscribe(() => this.fetchIncomeingOrdersData())
   }
 
   addDrink(drinkData: Drink) {
@@ -171,12 +171,16 @@ export class MenuService {
   }
 
   onSubmitOrder() {
-    this.http
-      .post(Database.url + 'orders.json', this.currentOrder)
-      .subscribe(() => {
-        this.itemsInOrderMessage = false;
-        this.currentOrder = [];
-      });
+    this.http.post("127.0.0.1:3000/order_details.json", this.currentOrder).subscribe()
+    
+    // this.http
+    //   .post(Database.url + 'orders.json', this.currentOrder)
+    //   .subscribe(() => {
+    //     this.itemsInOrderMessage = false;
+    //     this.currentOrder = [];
+    //   });
+
+    
   }
 
   fetchIncomeingOrdersData() {
@@ -211,6 +215,7 @@ export class MenuService {
     for (let item of this.currentOrder) {
       totalPrice = totalPrice + Number(item.quantity) * Number(item.price);
     }
+    totalPrice = totalPrice * 0.09225
     return totalPrice;
   }
 
